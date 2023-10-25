@@ -68,6 +68,26 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
     }
 
+    override fun onStop() {
+        super.onStop()
+        if(running) {
+            saveOffset()
+            stopwatch.stop()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if (running) {
+            setBaseTime()
+            offset = 0
+        }
+    }
+
     //Updates the time stopwatch.base
     private fun setBaseTime() {
         stopwatch.base = SystemClock.elapsedRealtime() - offset

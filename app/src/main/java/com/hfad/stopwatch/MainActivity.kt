@@ -60,6 +60,30 @@ class MainActivity : AppCompatActivity() {
             setBaseTime()
         }
     }
+    //override fun onStop() {
+    //  super.onStop()
+    override fun onPause() {
+        super.onPause()
+        if(running) {
+            saveOffset()
+            stopwatch.stop()
+        }
+    }
+
+    //override fun onStart() {
+    //  super.onStart()
+    //}
+
+    //override fun onRestart() {
+    // super.onRestart()
+
+    override fun onResume() {
+        super.onResume()
+        if (running) {
+            setBaseTime()
+            offset = 0
+        }
+    }
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putLong(OFFSET_KEY, offset)
@@ -68,25 +92,8 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
     }
 
-    override fun onStop() {
-        super.onStop()
-        if(running) {
-            saveOffset()
-            stopwatch.stop()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        if (running) {
-            setBaseTime()
-            offset = 0
-        }
-    }
+    //override fun onStop() {
+      //  super.onStop()
 
     //Updates the time stopwatch.base
     private fun setBaseTime() {
